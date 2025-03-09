@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trade with Aditya</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body { background: #F8F9FA; color: #333; }
+
+    /* Header */
+    header { background: #007BFF; padding: 20px; text-align: center; color: #fff; box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2); }
+    header h1 { font-size: 2.5rem; text-transform: uppercase; letter-spacing: 2px; }
+    nav a { margin: 0 15px; color: #fff; text-decoration: none; font-weight: bold; transition: 0.3s; }
+    nav a:hover { color: #FFD700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.8); }
+
+    /* Banner */
+    .banner { padding: 60px 20px; text-align: center; background: linear-gradient(135deg, #007BFF, #00BFFF); color: #fff; }
+    .banner h2 { font-size: 2.5rem; margin-bottom: 10px; }
+    .banner p { font-size: 1.2rem; }
+
+    /* Form Section */
+    #form-section { padding: 50px 20px; background: #fff; text-align: center; border-radius: 10px; max-width: 600px; margin: 40px auto; box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3); }
+    #form-section h2 { font-size: 1.8rem; margin-bottom: 20px; color: #007BFF; }
+    form { max-width: 500px; margin: auto; }
+    form input, form select, form button { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem; }
+    form input, form select { background: #f5f5f5; color: #333; outline: none; }
+    form button { background: #007BFF; color: #fff; cursor: pointer; font-weight: bold; transition: 0.3s; }
+    form button:hover { background: #0056b3; }
+
+    /* Success Message */
+    #success-message { display: none; font-size: 1.5rem; color: #28A745; font-weight: bold; margin-top: 20px; }
+
+    /* WhatsApp Button */
+    .whatsapp-btn { display: none; padding: 12px 20px; background: #25D366; color: #fff; border-radius: 8px; text-decoration: none; font-size: 1rem; font-weight: bold; margin-top: 15px; text-align: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); transition: 0.3s; }
+    .whatsapp-btn:hover { background: #1DA851; }
+
+    /* About */
+    #about { padding: 50px 20px; background: #F8F9FA; text-align: center; }
+    #about h2 { font-size: 1.8rem; margin-bottom: 15px; color: #007BFF; }
+    #about p { font-size: 1rem; line-height: 1.6; }
+
+    /* Footer */
+    footer { background: #007BFF; padding: 30px 20px; text-align: center; color: #fff; }
+    footer p { margin-top: 10px; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Trade with Aditya</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section id="home" class="banner">
+    <h2>Welcome to Aditya Trader</h2>
+    <p>Your trusted partner in smart trading solutions.</p>
+  </section>
+
+  <section id="form-section">
+    <h2>Trading Inquiry Form</h2>
+    <form id="tradeForm">
+      <input type="text" id="name" placeholder="Full Name" required>
+      <input type="email" id="email" placeholder="Email Address" required>
+      <input type="tel" id="phone" placeholder="Phone Number" required>
+
+      <select id="interest" required>
+        <option value="">Select Trading Interest</option>
+        <option value="future-options">Future Options</option>
+        <option value="forex">Forex</option>
+        <option value="swing-trading">Swing Trading</option>
+        <option value="long-term-investment">Long-Term Investment</option>
+      </select>
+
+      <input type="number" id="investment" placeholder="Investment Amount (INR)" required>
+      <input type="text" id="location" placeholder="Location" required>
+      <button type="submit">Submit</button>
+    </form>
+    <div id="loading" style="display: none; font-size: 1.2rem; color: #007BFF; font-weight: bold; margin-top: 10px;">
+  🔄 Submitting...
+</div>
+
+    <p id="success-message">✅ Submitted Successfully!</p>
+    <a id="whatsappBtn" class="whatsapp-btn" href="#" target="_blank">Go to WhatsApp</a>
+  </section>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p>At Aditya Trader, we specialize in providing high-quality trading strategies and insights. Our team helps you maximize your profits with minimum risk. Join our growing community of successful traders today.</p>
+  </section>
+
+  <footer id="contact">
+    <p>&copy; 2025 Aditya Trader. All rights reserved.</p>
+  </footer>
+
+<script>
+document.getElementById('tradeForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Loading show karein
+    document.getElementById('loading').style.display = "block";
+
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let phone = document.getElementById("phone").value;
+    let interest = document.getElementById("interest").value;
+    let investment = document.getElementById("investment").value;
+    let location = document.getElementById("location").value;
+
+    let formData = {
+      name: name,
+      email: email,
+      phone: phone,
+      interest: interest,
+      investment: investment,
+      location: location
+    };
+
+    fetch("https://script.google.com/macros/s/AKfycbwaMCrhOQLs23lSR9C7VUkPAGzNpWCTKsLDSbfz4iLXnuob5mQ0n3241dZQzbobq72uBA/exec", {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(response => response.text())
+    .then(data => {
+      if (data === "Success") {
+        document.getElementById('tradeForm').style.display = "none";
+        document.getElementById('success-message').style.display = "block";
+
+        let whatsappURL = `https://wa.me/917061101330?text=Hello%20Sir%2C%20I%20want%20to%20join%20your%20group.`;
+        let whatsappBtn = document.getElementById("whatsappBtn");
+        whatsappBtn.href = whatsappURL;
+        whatsappBtn.style.display = "inline-block";
+      } else {
+        alert("Submission failed. Please try again.");
+      }
+    })
+    .catch(error => {
+      console.error("Error:", error);
+      alert("Error! Please try again.");
+    })
+    .finally(() => {
+      // Loading hide karein
+      document.getElementById('loading').style.display = "none";
+    });
+});
+</script>
+</body>
+</html>

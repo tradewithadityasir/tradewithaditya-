@@ -101,35 +101,26 @@
 document.getElementById('tradeForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    // Loading show karein
+    // Loading message show karein
     document.getElementById('loading').style.display = "block";
 
-    let name = document.getElementById("name").value;
-    let email = document.getElementById("email").value;
-    let phone = document.getElementById("phone").value;
-    let interest = document.getElementById("interest").value;
-    let investment = document.getElementById("investment").value;
-    let location = document.getElementById("location").value;
-
     let formData = {
-      name: name,
-      email: email,
-      phone: phone,
-      interest: interest,
-      investment: investment,
-      location: location
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      phone: document.getElementById("phone").value,
+      interest: document.getElementById("interest").value,
+      investment: document.getElementById("investment").value,
+      location: document.getElementById("location").value
     };
 
-    fetch("https://script.google.com/macros/s/AKfycbxY_QnYUyrvTpchvCA2MVfZOGMXn0t8YpCUs0r4r2jUySBrN-ZfCSA5r3qYgFh7xCll/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbwNJm4VC-wXD86iWx7qke88bltnjfWRd3PC5s7IP2M4mFVlD-XUICHpZwicPkmUVnktmw/exec", { // Isko apne Web App URL se replace karein
       method: "POST",
       body: JSON.stringify(formData),
-      headers: {
-        "Content-Type": "application/json"
-      }
+      headers: { "Content-Type": "application/json" }
     })
-    .then(response => response.text())
+    .then(response => response.json())
     .then(data => {
-      if (data === "Success") {
+      if (data.status === "success") {
         document.getElementById('tradeForm').style.display = "none";
         document.getElementById('success-message').style.display = "block";
 
@@ -138,7 +129,7 @@ document.getElementById('tradeForm').addEventListener('submit', function(event) 
         whatsappBtn.href = whatsappURL;
         whatsappBtn.style.display = "inline-block";
       } else {
-        alert("Submission failed. Please try again.");
+        alert("Submission failed: " + data.message);
       }
     })
     .catch(error => {
@@ -146,10 +137,10 @@ document.getElementById('tradeForm').addEventListener('submit', function(event) 
       alert("Error! Please try again.");
     })
     .finally(() => {
-      // Loading hide karein
+      // Loading message hide karein
       document.getElementById('loading').style.display = "none";
     });
 });
 </script>
 </body>
-</html>
+  </html>
